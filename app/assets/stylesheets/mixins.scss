@@ -1,0 +1,70 @@
+@mixin nav(
+  $item-padding: 10px 20px,
+  $orientation: horizontal,
+  $spacing: 20px
+) {
+  display: block;
+  .nav-item {
+    list-style: none;
+  }
+  .active-item {
+    background: $background-color-light;
+    border-radius: $border-radius-small;
+  }
+  .nav-link {
+    display: inline-block;
+    padding: $item-padding;
+    text-decoration: none;
+  }
+  @if $orientation == horizontal {
+    .nav-item {
+      display: inline-block;
+      &:not(:first-of-type) {
+        margin-left: $spacing;
+      }
+    }
+  }
+  @else if $orientation == vertical {
+    .nav-item {
+      display: block;
+      &:not(:first-of-type) {
+        margin-top: $spacing;
+      }
+    }
+  }
+  @content;
+}
+
+@mixin flex-columns(
+  $columns...
+) {
+  display: flex;
+  justify-content: space-between;
+  @for $i from 0 to length($columns) {
+    $width: nth($columns, $i + 1);
+    > :nth-child(#{$i + 1}) {
+      width: $width;
+      @if $width {
+        flex-shrink: 0;
+      }
+    }
+  }
+  @content;
+}
+
+@mixin grid(
+  $min-width: 250px,
+  $spacing: 20px
+) {
+  display: grid;
+  grid-gap: $spacing;
+  grid-template-columns: repeat(auto-fill, minmax($min-width, 1fr));
+}
+
+@mixin horizontal-spacing(
+  $spacing: 20px
+) {
+  > :not(:first-child) {
+    margin-left: $spacing;
+  }
+}

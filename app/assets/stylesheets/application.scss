@@ -1,0 +1,114 @@
+//= require_tree .
+//= require_self
+
+@import 'mixins';
+@import 'variables';
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: $background-color-medium;
+  color: $text-color-light;
+  font-family: sans-serif;
+  font-size: $text-size-medium;
+}
+
+a {
+  color: $link-color-light;
+  &:hover {
+    color: $link-color-extra-light;
+  }
+}
+
+.app-header {
+  background-color: $background-color-dark;
+  padding: $padding-large;
+}
+
+.app-nav {
+  @include nav(
+    $orientation: horizontal,
+    $spacing: $margin-small,
+    $item-padding: $padding-small $padding-medium
+  ) {
+    font-weight: bold;
+  }
+}
+
+.app-content {
+  padding: $padding-large;
+}
+
+.store-wrapper {
+  .store-nav {
+    display: none;
+  }
+  @media screen and (min-width: 60em) {
+    @include flex-columns(13em, null);
+    @include horizontal-spacing($margin-large);
+    .store-nav {
+      display: block;
+    }
+  }
+}
+
+.store-nav {
+  @include nav(
+    $item-padding: $padding-extra-small $padding-medium,
+    $orientation: vertical,
+    $spacing: $margin-extra-small
+  ) {
+    .active-item {
+      background: none;
+      border: solid 0.1em $background-color-extra-light;
+      border-radius: $border-radius-large;
+    }
+    .nav-heading {
+      font-size: $text-size-extra-small;
+      margin: $margin-medium;
+      text-transform: uppercase;
+      &:first-of-type {
+        margin-top: 0;
+      }
+    }
+  }
+}
+
+.recommendations-content {
+  width: 100%;
+  .items-wrapper {
+    @include grid($min-width: 16em, $spacing: $margin-medium);
+    margin-top: $margin-medium;
+  }
+  .recommended-item {
+    background: $background-color-light;
+  }
+  .item-preview {
+    background: $background-color-dark;
+    height: 13em;
+  }
+  .item-info-wrapper {
+    @include flex-columns(null, 3.5em);
+    padding: $padding-small;
+  }
+  .item-title {
+    font-size: $text-size-medium;
+    padding: $padding-small 0;
+  }
+  .item-price {
+    background: $background-color-extra-light;
+    border-radius: $border-radius-small;
+    color: $text-color-dark;
+    font-weight: bold;
+    padding: $padding-small;
+    text-align: center;
+  }
+  .item-reason {
+    color: $text-color-medium;
+    font-size: $text-size-small;
+    padding: $padding-small;
+  }
+}
